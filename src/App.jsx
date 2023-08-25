@@ -1,5 +1,8 @@
 import Navbar from "./Components/Navbar/Navbar";
 import ItemListContainer from "./Components/ItemListContainer/ItemListContainer";
+import ItemDatailContainer from "./Components/ItemDatailContainer";
+import { Routes, Route} from "react-router-dom";
+import React from "react";
 
 function App() {
 
@@ -8,7 +11,11 @@ function App() {
     <div className="container">
       <Navbar />
 
-      <ItemListContainer greeting="Hola Tutor!" />
+      <Routes>
+        <Route path="/" element={<ItemListContainer />} />
+        <Route path="/category/:categoryId" element={<ItemListContainer />} />
+        <Route path="/item/:id" element={<ItemDatailContainer/>} />
+      </Routes>
     </div>
   )
 }
