@@ -2,25 +2,28 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import './ItemListCard.css';
+
 
 const ItemList = ({ items, isLoading }) => {
     if (isLoading) {
         return <h2>Loading...</h2>
     }
     return <div>
-        <h1>ItemList</h1>
+        <h1>Productos</h1>
 
-        <ul>
+        <div className="card-container"> {/* Utiliza un contenedor para las tarjetas */}
             {items.map((item) => (
-                <li key={item.id}>
+                <div key={item.id} className="card">
                     <Link to={`/item/${item.id}`} >
-                    <h3>{item.name}</h3>
-                    <p>{item.price}</p>
-                    <p>{item.category}</p>
+                        <img src={item.image} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.price}</p>
+                        <p>{item.category}</p>
                     </Link>
-                </li>
+                </div>
             ))}
-        </ul>
+        </div>
     </div>
 };
 
