@@ -9,9 +9,9 @@ const ItemDetail = ({ item, isLoading }) => {
         return <h2>Producto no encontrado</h2>;
     }
     return <div>
-        <h1>{item.name}</h1>
+        <h1>{item.title}</h1>
         <p>${item.price}</p>
-        <p>{item.category}</p>
+        <p>{item.categoryId}</p>
     </div>;
 };
 

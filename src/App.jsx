@@ -4,19 +4,21 @@ import ItemDatailContainer from "./Components/ItemDatailContainer";
 import { Routes, Route} from "react-router-dom";
 import React from "react";
 
+
 function App() {
 
 
   return (
-    <div className="container">
-      <Navbar />
+  
+     <div className="container">
+       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<ItemListContainer />} />
-        <Route path="/category/:categoryId" element={<ItemListContainer />} />
-        <Route path="/item/:id" element={<ItemDatailContainer/>} />
-      </Routes>
-    </div>
+       <Routes>
+         <Route path="/" element={<ItemListContainer />} />
+         <Route path="/category/:categoryId" element={<ItemListContainer />} />
+         <Route path="/item/:id" element={<ItemDatailContainer/>} />
+       </Routes>
+     </div>
   )
 }
 

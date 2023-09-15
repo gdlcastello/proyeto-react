@@ -1,5 +1,3 @@
-
-import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './ItemListCard.css';
@@ -14,12 +12,12 @@ const ItemList = ({ items, isLoading }) => {
 
         <div className="card-container"> {/* Utiliza un contenedor para las tarjetas */}
             {items.map((item) => (
-                <div key={item.id} className="card">
-                    <Link to={`/item/${item.id}`} >
-                        <img src={item.image} alt={item.name} />
-                        <h3>{item.name}</h3>
+                <div key={item.Id} className="card">
+                    <Link to={`/item/${item.Id}`} >
+                        <img src={`/${item.imageId}`} alt={item.title} />
+                        <h3>{item.title}</h3>
                         <p>{item.price}</p>
-                        <p>{item.category}</p>
+                        <p>{item.categoryId}</p>
                     </Link>
                 </div>
             ))}
@@ -31,6 +29,6 @@ const ItemList = ({ items, isLoading }) => {
 ItemList.propTypes = {
     items: PropTypes.array.isRequired,
     isLoading: PropTypes.bool,
-  };
+};
 
 export default ItemList;
