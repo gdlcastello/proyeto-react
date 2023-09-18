@@ -12,25 +12,24 @@ const CartProvider = ({ children}) => {
     };
 
     const addItem = (product, quantity) => {
-
-        const itemInCart = isInCart(product.id)
-
-        if (iteminCart) {
-            const newCart = cart.map((item) => {
-                if (item.id === product.id) {
-                    return {
-                        ...item,
-                        quantity: item.quantity + quantity,
-                    };
+        const itemInCart = isInCart(product.id);
+      
+        if (itemInCart) {
+          const newCart = cart.map((item) => {
+            if (item.id === product.id) {
+              return {
+                ...item,
+                quantity: item.quantity + quantity,
+              };
             }
-
             return item;
-        });
-        setCart(newCart);
-    } else {
-        setCart([...Cart, { ...product, quantity}]);
-    }
-};
+          });
+          setCart(newCart);
+        } else {
+          setCart([...cart, { ...product, quantity }]);
+        }
+      };
+      
 
 const removeItem = (id) => {
     const newCart = cart.filter((item) => item.id !== id);
