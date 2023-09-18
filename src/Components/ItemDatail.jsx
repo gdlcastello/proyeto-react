@@ -1,8 +1,12 @@
-import React from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import CartContext from "../context/CartContext";
 
 
-const ItemDetail = ({ item, isLoading, addItem }) => {
+const ItemDetail = ({ item, isLoading }) => {
+    const [itemCount, setItemCount] = useState(1);
+    const { addItem } = useContext(CartContext);
+
     if (isLoading) {
         return <h2>Loading...</h2>;
     }
@@ -13,7 +17,11 @@ const ItemDetail = ({ item, isLoading, addItem }) => {
         <h1>{item.title}</h1>
         <p>${item.price}</p>
         <p>{item.categoryId}</p>
-        <button onClick={() => addItem(item, 1)}>Agregar al carrito</button>
+
+
+        <input type="number" value={itemCount} onChange={(e) => setItemCount(parseInt(e.target.value))} />
+
+        <button onClick={() => addItem(item, itemCount)}>Agregar al carrito</button>
     </div>;
 };
 

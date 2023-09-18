@@ -2,52 +2,54 @@ import { useState } from "react";
 import CartContext from "./CartContext";
 
 
-const CartProvider = ({ children}) => {
-    const [cart, setCart] = useState ([]);
+const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
 
-    const isInCart = (id) => {
-        const itemInCart = cart.find((item) => item.id === id);
-        return !! itemInCart;
-    
-    };
+  const isInCart = (id) => {
+    const itemInCart = cart.find((item) => item.id === id);
+    return !!itemInCart;
+  };
 
-    const addItem = (product, quantity) => {
-        const itemInCart = isInCart(product.id);
-      
-        if (itemInCart) {
-          const newCart = cart.map((item) => {
-            if (item.id === product.id) {
-              return {
-                ...item,
-                quantity: item.quantity + quantity,
-              };
-            }
-            return item;
-          });
-          setCart(newCart);
-        } else {
-          setCart([...cart, { ...product, quantity }]);
+  const addItem = (product, quantity) => {
+    const itemInCart = isInCart(product.id);
+
+    if (itemInCart) {
+      const newCart = cart.map((item) => {
+        if (item.id === product.id) {
+          return {
+            ...item,
+            quantity: item.quantity + quantity,
+          };
         }
-      };
-      
+        return item;
+      });
 
-const removeItem = (id) => {
+      setCart(newCart);
+    } else {
+      setCart([...cart, { ...product, quantity }]);
+    }
+    setCartCount(() => cartCount + quantity);
+  };
+
+
+  const removeItem = (id) => {
     const newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
-};
+  };
 
-const clear = () => {
+  const clear = () => {
     setCart([]);
-};
+  };
 
 
-return (
+  return (
     <CartContext.Provider
-    value={{ cart, addItem, removeItem, clear, isInCart}}
+      value={{ cart, addItem, removeItem, clear, isInCart, cartCount }}
     >
-        {children}
-        </CartContext.Provider>
-);
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export default CartProvider;
