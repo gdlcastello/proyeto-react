@@ -1,0 +1,35 @@
+
+.bi-cart3 {
+    font-size: 2rem; 
+  }
+  
+  
+  .cart-widget-container {
+    position: fixed;
+    top: 20px; 
+    right: 20px; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  
+.bi-cart3 {
+    font-size: 1.8rem; /
+  }
+  
+  
+  .badge {
+    font-size: 0.8rem; 
+  }
+  
+  
+  .position-absolute {
+    position: absolute;
+  }
+  
+  
+  .badge-container {
+    position: relative;
+    margin-left: 10px; 
+  }
+  

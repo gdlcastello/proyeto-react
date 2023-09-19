@@ -4,11 +4,12 @@ import ItemDatailContainer from "./Components/ItemDatailContainer";
 import { Routes, Route} from "react-router-dom";
 import React from "react";
 import CartProvider from "./context/CartProvider";
+import Checkout from "./Components/Checkout/Checkout";
 
 
 function App() {
 
-
+ 
   return (
   
      <CartProvider>
@@ -18,7 +19,7 @@ function App() {
          <Route path="/" element={<ItemListContainer />} />
          <Route path="/category/:categoryId" element={<ItemListContainer />} />
          <Route path="/item/:id" element={<ItemDatailContainer/>} />
-         <Route path="/Checkout" element={<ItemDatailContainer/>} />
+         <Route path="/checkout" element={<Checkout/>} />
        </Routes>
      </CartProvider>
   )

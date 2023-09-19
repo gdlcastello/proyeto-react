@@ -2,20 +2,20 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB6PHuO_MonhWr8FuBLkIohAzQF5B32wY4",
-    authDomain: "coder-react-a0fd4.firebaseapp.com",
-    projectId: "coder-react-a0fd4",
-    storageBucket: "coder-react-a0fd4.appspot.com",
-    messagingSenderId: "897736374327",
-    appId: "1:897736374327:web:6792c6c6085831d84867b2"
-};
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID
 
+  };
 
-
+  
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// getProduct
+
 export const getProduct = async (id) => {
     const itemsCollection = collection(db, 'items');
     const itemsSnapshot = await getDocs(itemsCollection);
@@ -24,7 +24,7 @@ export const getProduct = async (id) => {
     return itemList.find(item => item.Id === id);
 };
 
-// getProducts
+
 export const getProducts = async (category) => {
     const itemsCollection = collection(db, 'items');
     const itemsSnapshot = await getDocs(itemsCollection);
