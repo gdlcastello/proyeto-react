@@ -1,15 +1,15 @@
 import React, { useState, useContext } from "react";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import CartContext from "../../context/CartContext";
-import './Checkout.css';
+import "./Checkout.css";
 
 const Checkout = () => {
-  const { cart, addItem, removeItem } = useContext(CartContext);
+  const { cart, setCart, addItem, removeItem } = useContext(CartContext);
 
   const [userData, setUserData] = useState({
     name: "",
     phone: "",
-    email: ""
+    email: "",
   });
 
   const handleInputChange = (e) => {
@@ -31,15 +31,19 @@ const Checkout = () => {
     removeItem(item.Id);
   };
 
+  const getTotalAmount = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
   const createOrder = () => {
     const order = {
       buyer: userData,
-      items: cart.map(item => ({
+      items: cart.map((item) => ({
         Id: item.Id,
         title: item.title,
-        price: item.price
+        price: item.price,
       })),
-      total: cart.reduce((total, item) => total + item.price * item.quantity, 0)
+      total: getTotalAmount(),
     };
 
     const db = getFirestore();
@@ -54,10 +58,15 @@ const Checkout = () => {
       });
   };
 
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="checkout-container">
       <h2>Carrito de Compras</h2>
-      <form>
+
+      <div className="form-container">
         <label htmlFor="name">Nombre:</label>
         <input
           type="text"
@@ -82,7 +91,7 @@ const Checkout = () => {
           value={userData.email}
           onChange={handleInputChange}
         />
-      </form>
+      </div>
 
       {cart.length > 0 ? (
         <ul>
@@ -105,7 +114,21 @@ const Checkout = () => {
         <p>No hay productos en el carrito.</p>
       )}
 
-      <button onClick={createOrder}>Crear Orden</button>
+      <div className="total-amount">
+        <p>Total: ${getTotalAmount()}</p>
+      </div>
+
+      <button
+        className="create-order-button"
+        onClick={createOrder}
+        disabled={cart.length === 0}
+      >
+        Crear Orden
+      </button>
+
+      <button className="clear-cart-button" onClick={handleReload}>
+        Limpiar Carrito
+      </button>
     </div>
   );
 };
